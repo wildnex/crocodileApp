@@ -56,17 +56,8 @@ public class MainActivity extends AppCompatActivity {
         checkInsane = findViewById(R.id.checkInsane);
         checkHYIP = findViewById(R.id.checkHYIP);
         checkPaging = findViewById(R.id.checkPaging);
-
-        Typeface tf = Typeface.createFromAsset(getAssets(), "font/ArbatDi.ttf"); //Ставим шрифт
-        textView.setTypeface(tf);
-        textView2.setTypeface(tf);
-        checkEasy.setTypeface(tf);
-        checkNormal.setTypeface(tf);
-        checkHard.setTypeface(tf);
-        checkInsane.setTypeface(tf);
-        checkHYIP.setTypeface(tf);
-        checkPaging.setTypeface(tf);
-
+        drawer = findViewById(R.id.drawer_layout);
+        SetTypeFace();
         mySound = new SoundPool(5, AudioManager.STREAM_MUSIC, 1);
         soundClick = mySound.load(this, R.raw.btnm, 1);
         soundDisturbance = mySound.load(this, R.raw.btnm2, 1); //Находим звук
@@ -81,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         if (checkPaging.isChecked() && (pressedAgain + 5000 > System.currentTimeMillis())) { //Если чекбокс "запретить перелистывания" включен и с времени приведущего нажатия прошло менее 5 секунд.
             textView.setText(getString(R.string.trying_to_list, currentWord));
             mySound.play(soundDisturbance, 1, 1, 1, 0, 1);
-        } else {                                                                                    //Bначе
+        } else {
             while (!finalArray.isEmpty() && isAlreadyUsed(finalArray.peek())) {
                 finalArray.poll();
             }
@@ -101,8 +92,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private boolean isAlreadyUsed(String word) {
-        for (String i : mUsed) {                                                        //Перебираем элементы массива использованных слов
-            if (i.equals(word)) {                                                     //Пока не найдем совпадения с настоящим словом
+        for (String i : mUsed) {     //Перебираем элементы массива использованных слов
+            if (i.equals(word)) {    //Пока не найдем совпадения с настоящим словом
                 return true;
             }
         }
@@ -118,7 +109,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void ListBuilder() {
-
         finalArray.clear();
         List<String> temp = new ArrayList<>();
         if (checkEasy.isChecked()) temp.addAll(Arrays.asList(mEasy));
@@ -166,5 +156,19 @@ public class MainActivity extends AppCompatActivity {
         ListBuilder(); //Строим очередь заново
         Toast.makeText(this, R.string.refreshed, Toast.LENGTH_SHORT).show();  //Уведомляем
     }
+
+    private void SetTypeFace() {
+        Typeface tf = Typeface.createFromAsset(getAssets(), "font/ArbatDi.ttf"); //Ставим шрифт
+        textView.setTypeface(tf);
+        textView2.setTypeface(tf);
+        checkEasy.setTypeface(tf);
+        checkNormal.setTypeface(tf);
+        checkHard.setTypeface(tf);
+        checkInsane.setTypeface(tf);
+        checkHYIP.setTypeface(tf);
+        checkPaging.setTypeface(tf);
+    }
+
+
 }
 
