@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Крокодил</string>
+    <string name="refreshed">Теперь доступны все слова</string>
+    <string name="nothing_checked">Отметь хоть что-нибудь</string>
+    <string name="end_of_array">Кончились слова</string>
+    <string name="trying_to_list">Эй, давай без перелистываний Показывай: %1$s</string>
+    <string name="rules">Правила: нельзя\nиздавать звуки\nпоказывать на предметы\nпоказывать буквы</string>
+    <string name="simple_word"> Простые слова</string>
+    <string name="normal_word"> Обычные слова</string>
+    <string name="hard_word"> Сложные слова</string>
+    <string name="insane_word"> Лютая дичь</string>
+    <string name="hyip_word"> Хайп</string>
+    <string name="no_listing">Без листания</string>
+    <string name="imagebutton_desc">Главная кнопка</string>
+    <string name="navbutton_desc">Стрелочка навбара</string>
+    <string name="clearbutton_desc">Кнопка сброса слов</string>
+</resources>
