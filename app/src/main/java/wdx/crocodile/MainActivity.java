@@ -9,6 +9,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     private SharedPreferences sPref; //Для сохранения использованных
     private String[] mUsed = new String[total]; //Использованные слова
     private String currentWord = ""; //Настоящее слово
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,14 +85,38 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, R.string.end_of_array, Toast.LENGTH_SHORT).show();
                 drawer.openDrawer(Gravity.START);
             } else {
-                textView.setText(currentWord); //Выводим не использованное ранее слово
+                setAnimatedText();
                 mUsed[exNum++] = currentWord;  //Записываем его в использованные
             }
+
         }
         mySound.play(soundClick, 1, 1, 1, 0, 1); //Звук нажатия кнопки
         pressedAgain = System.currentTimeMillis(); //Сохраняем время нажатия
 
     }
+
+    private void setAnimatedText() {
+        final Animation inAnim = AnimationUtils.loadAnimation(this, android.R.anim.slide_in_left);
+        final Animation outAnim = AnimationUtils.loadAnimation(this, android.R.anim.slide_out_right);
+        textView.startAnimation(outAnim);
+        outAnim.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                textView.setText(currentWord);
+                textView.startAnimation(inAnim);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+            }
+        });
+    }
+
+
 
     private boolean isAlreadyUsed(String word) {
         for (String i : mUsed) {     //Перебираем элементы массива использованных слов
