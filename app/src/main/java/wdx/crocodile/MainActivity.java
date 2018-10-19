@@ -44,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
     private String[] mUsed = new String[total]; //Использованные слова
     private String currentWord = ""; //Настоящее слово
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,6 +97,8 @@ public class MainActivity extends AppCompatActivity {
     private void setAnimatedText() {
         final Animation inAnim = AnimationUtils.loadAnimation(this, android.R.anim.slide_in_left);
         final Animation outAnim = AnimationUtils.loadAnimation(this, android.R.anim.slide_out_right);
+        inAnim.setDuration(200);
+        outAnim.setDuration(200);
         textView.startAnimation(outAnim);
         outAnim.setAnimationListener(new Animation.AnimationListener() {
             @Override
